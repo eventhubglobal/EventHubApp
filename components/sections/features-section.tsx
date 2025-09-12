@@ -22,7 +22,7 @@ export function FeaturesSection() {
       icon: CreditCard,
       title: 'Secure Payments',
       description: 'Protected transactions',
-      color: 'text-blue-900 bg-blue-50 border-blue-100'
+      color: 'text-brand-blue bg-brand-blue-light/10 border-brand-blue-light/20'
     },
     {
       icon: MessageSquare,
@@ -66,7 +66,7 @@ export function FeaturesSection() {
     <section className="py-24 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-blue mb-6">
             Why Choose <span className="text-gradient">Event Hub?</span>
           </h2>
         </div>
@@ -80,7 +80,7 @@ export function FeaturesSection() {
                     <feature.icon className="h-8 w-8" />
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-blue-900 group-hover:text-blue-700 transition-colors mb-2">
+                <h3 className="text-lg font-semibold text-brand-blue group-hover:text-brand-blue-hover transition-colors mb-2">
                   {feature.title}
                 </h3>
                 <p className="text-gray-600 text-xs">

@@ -11,7 +11,7 @@ export function CTABannerSection() {
     <>
       <section className="py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-48">
-          <div className="bg-blue-900 rounded-2xl overflow-hidden">
+          <div className="bg-brand-blue rounded-2xl overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
               {/* Left Side - Text Content */}
               <div className="p-8 lg:p-12 flex flex-col justify-center text-center">
@@ -32,7 +32,7 @@ export function CTABannerSection() {
                 <div className="flex justify-center">
                   <Button
                     size="lg"
-                    className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-8 py-6 rounded-md w-[300px]"
+                    className="bg-white hover:bg-gray-100 text-brand-blue font-semibold px-8 py-6 rounded-md w-[300px]"
                     onClick={() => setIsModalOpen(true)}
                   >
                     Join Waitlist

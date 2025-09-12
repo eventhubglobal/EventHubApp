@@ -16,7 +16,7 @@ export function TrustIndicatorsSection() {
                 <Shield className="h-4 w-4 text-white" />
               </div>
             </div>
-            <h3 className="text-2xl font-semibold text-blue-900 mb-4">100% Verified</h3>
+            <h3 className="text-2xl font-semibold text-brand-blue mb-4">100% Verified</h3>
             <p className="text-gray-600">All vendors verified</p>
           </div>
           
@@ -27,11 +27,11 @@ export function TrustIndicatorsSection() {
                 alt="Secure Payments"
                 className="w-24 h-24 rounded-3xl object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-blue-900 rounded-full flex items-center justify-center">
+              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center">
                 <CreditCard className="h-4 w-4 text-white" />
               </div>
             </div>
-            <h3 className="text-2xl font-semibold text-blue-900 mb-4">Secure Payments</h3>
+            <h3 className="text-2xl font-semibold text-brand-blue mb-4">Secure Payments</h3>
             <p className="text-gray-600">Protected transactions</p>
           </div>
           
@@ -46,7 +46,7 @@ export function TrustIndicatorsSection() {
                 <Users className="h-4 w-4 text-white" />
               </div>
             </div>
-            <h3 className="text-2xl font-semibold text-blue-900 mb-4">24/7 Support</h3>
+            <h3 className="text-2xl font-semibold text-brand-blue mb-4">24/7 Support</h3>
             <p className="text-gray-600">Always here to help</p>
           </div>
         </div>

@@ -17,7 +17,7 @@ export function HowItWorksSection() {
       title: 'Search & Discover',
       description: 'Browse categories, view vendor profiles, and check portfolios.',
       icon: Search,
-      color: 'bg-blue-900'
+      color: 'bg-brand-blue'
     },
     {
       number: '2',
@@ -69,7 +69,7 @@ export function HowItWorksSection() {
       title: 'Book & Coordinate',
       description: 'Book your chosen vendor and coordinate through our platform.',
       icon: Calendar,
-      color: 'bg-yellow-500'
+      color: 'bg-brand-yellow'
     }
   ];
 
@@ -77,7 +77,7 @@ export function HowItWorksSection() {
     <section id="how-it-works" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-brand-blue mb-4">
             How It Works
           </h2>
           <p className="text-lg text-gray-600 mb-2">
@@ -91,7 +91,7 @@ export function HowItWorksSection() {
         {/* Option 1: Browse Vendors */}
         <div className="mb-20">
           <div className="text-center mb-12">
-            <h3 className="text-2xl font-bold text-blue-900 mb-2">
+            <h3 className="text-2xl font-bold text-brand-blue mb-2">
               Find Vendors Yourself
             </h3>
             <p className="text-gray-600">
@@ -107,10 +107,10 @@ export function HowItWorksSection() {
                     <div className={`w-16 h-16 ${step.color} rounded-full mx-auto mb-4 flex items-center justify-center relative`}>
                       <step.icon className="h-8 w-8 text-white" />
                       <div className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
-                        <span className="text-sm font-bold text-blue-900">{step.number}</span>
+                        <span className="text-sm font-bold text-brand-blue">{step.number}</span>
                       </div>
                     </div>
-                    <h4 className="text-lg font-semibold text-blue-900 mb-3">
+                    <h4 className="text-lg font-semibold text-brand-blue mb-3">
                       {step.title}
                     </h4>
                     <p className="text-gray-600 leading-relaxed flex-1">
@@ -149,10 +149,10 @@ export function HowItWorksSection() {
                     <div className={`w-16 h-16 ${step.color} rounded-full mx-auto mb-4 flex items-center justify-center relative`}>
                       <step.icon className="h-8 w-8 text-white" />
                       <div className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
-                        <span className="text-sm font-bold text-blue-900">{step.number}</span>
+                        <span className="text-sm font-bold text-brand-blue">{step.number}</span>
                       </div>
                     </div>
-                    <h4 className="text-lg font-semibold text-blue-900 mb-3">
+                    <h4 className="text-lg font-semibold text-brand-blue mb-3">
                       {step.title}
                     </h4>
                     <p className="text-gray-600 leading-relaxed flex-1">

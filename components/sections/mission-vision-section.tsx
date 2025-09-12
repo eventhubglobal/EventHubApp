@@ -8,11 +8,11 @@ export function MissionVisionSection() {
           {/* Mission */}
           <div className="text-center">
             <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-blue-900 rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center">
                 <Target className="h-8 w-8 text-white" />
               </div>
             </div>
-            <h2 className="text-2xl font-bold text-blue-900 mb-6 font-asul">
+            <h2 className="text-2xl font-bold text-brand-blue mb-6 font-asul">
               Our Mission
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed font-raleway">
@@ -24,11 +24,11 @@ export function MissionVisionSection() {
           {/* Vision */}
           <div className="text-center">
             <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-blue-900 rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center">
                 <Telescope className="h-8 w-8 text-white" />
               </div>
             </div>
-            <h2 className="text-2xl font-bold text-blue-900 mb-6 font-asul">
+            <h2 className="text-2xl font-bold text-brand-blue mb-6 font-asul">
               Our Vision
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed font-raleway">

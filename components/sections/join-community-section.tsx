@@ -6,7 +6,7 @@ export function JoinCommunitySection() {
   return (
     <section className="py-12">
       <div className="container mx-auto px-16 sm:px-6 lg:px-56">
-        <div className="bg-white rounded-2xl overflow-hidden border-8 border-blue-900">
+        <div className="bg-white rounded-2xl overflow-hidden border-8 border-brand-blue">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Left Side - Image */}
             <div className="relative h-80 lg:h-full">
@@ -32,7 +32,7 @@ export function JoinCommunitySection() {
                 {/* Book an Event Button */}
                 <Button
                   size="lg"
-                  className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-6 rounded-md"
+                  className="bg-brand-blue hover:bg-brand-blue-hover text-white font-semibold px-8 py-6 rounded-md"
                   asChild
                 >
                   <Link href="/vendors">
@@ -44,7 +44,7 @@ export function JoinCommunitySection() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="bg-white hover:bg-gray-50 text-blue-900 border-2 border-blue-900 font-semibold px-8 py-6 rounded-md"
+                  className="bg-white hover:bg-gray-50 text-brand-blue border-2 border-brand-blue font-semibold px-8 py-6 rounded-md"
                   asChild
                 >
                   <Link href="/register">

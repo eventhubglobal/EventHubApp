@@ -36,7 +36,7 @@ export function CategoriesSection() {
       name: 'Photographers',
       icon: Camera,
       vendorCount: '120+',
-      color: 'bg-blue-100 text-blue-900',
+      color: 'bg-brand-blue-light/20 text-brand-blue',
       href: '/vendors?category=photography',
       image: 'https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2'
     },
@@ -60,7 +60,7 @@ export function CategoriesSection() {
       name: 'Cake Vendors',
       icon: Cake,
       vendorCount: '120+',
-      color: 'bg-yellow-100 text-yellow-600',
+      color: 'bg-brand-yellow-light/20 text-brand-yellow',
       href: '/vendors?category=cakes',
       image: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2'
     },
@@ -118,7 +118,7 @@ export function CategoriesSection() {
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-blue mb-6">
             Browse By Category
           </h2>
         </div>
@@ -146,7 +146,7 @@ export function CategoriesSection() {
                   </div>
                 </div>
                 <CardContent className="p-4">
-                  <h3 className="text-lg font-semibold text-blue-900 group-hover:text-blue-700 transition-colors text-center">
+                  <h3 className="text-lg font-semibold text-brand-blue group-hover:text-brand-blue-hover transition-colors text-center">
                     {category.name}
                   </h3>
                 </CardContent>

@@ -66,7 +66,7 @@ export function CTASection() {
                   alt="Secure"
                   className="w-20 h-20 rounded-2xl object-cover"
                 />
-                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center">
                   <Calendar className="h-4 w-4 text-white" />
                 </div>
               </div>

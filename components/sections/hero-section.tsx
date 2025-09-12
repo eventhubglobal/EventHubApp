@@ -26,7 +26,7 @@ export function HeroSection() {
                 Nigeria's Most Trusted Marketplace
               </Badge>
               
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-blue-900 mb-8 leading-tight font-asul">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-brand-blue mb-8 leading-tight font-asul">
                 The Future Of Event Management
               </h1>
               
@@ -38,7 +38,7 @@ export function HeroSection() {
               <div className="flex justify-center lg:justify-start">
                 <Button 
                   size="lg" 
-                  className="bg-blue-900 hover:bg-blue-800 text-white font-semibold h-14 px-8"
+                  className="bg-brand-blue hover:bg-brand-blue-hover text-white font-semibold h-14 px-8"
                   onClick={() => setIsModalOpen(true)}
                 >
                   Join Waitlist
@@ -61,11 +61,11 @@ export function HeroSection() {
               {/* Floating Cards */}
               <div className="absolute -top-6 -left-6 bg-blue-50 rounded-2xl p-4 shadow-lg border border-blue-100">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <Camera className="h-6 w-6 text-blue-900" />
+                  <div className="w-12 h-12 bg-brand-blue-light/20 rounded-xl flex items-center justify-center">
+                    <Camera className="h-6 w-6 text-brand-blue" />
                   </div>
                   <div>
-                    <div className="font-semibold text-blue-900">Photography</div>
+                    <div className="font-semibold text-brand-blue">Photography</div>
                     <div className="text-sm text-gray-600">95+ vendors</div>
                   </div>
                 </div>
@@ -77,7 +77,7 @@ export function HeroSection() {
                     <Palette className="h-6 w-6 text-pink-600" />
                   </div>
                   <div>
-                    <div className="font-semibold text-blue-900">Decorators</div>
+                    <div className="font-semibold text-brand-blue">Decorators</div>
                     <div className="text-sm text-gray-600">120+ vendors</div>
                   </div>
                 </div>
@@ -85,11 +85,11 @@ export function HeroSection() {
 
               <div className="absolute -bottom-6 -right-6 bg-yellow-50 rounded-2xl p-4 shadow-lg border border-yellow-100">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
-                    <UtensilsCrossed className="h-6 w-6 text-yellow-600" />
+                  <div className="w-12 h-12 bg-brand-yellow-light/20 rounded-xl flex items-center justify-center">
+                    <UtensilsCrossed className="h-6 w-6 text-brand-yellow" />
                   </div>
                   <div>
-                    <div className="font-semibold text-blue-900">Catering</div>
+                    <div className="font-semibold text-brand-blue">Catering</div>
                     <div className="text-sm text-gray-600">89+ vendors</div>
                   </div>
                 </div>

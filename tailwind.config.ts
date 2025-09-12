@@ -65,6 +65,17 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
+        // Custom brand colors
+        'brand-blue': {
+          DEFAULT: '#032D71',
+          hover: '#042A5F',
+          light: '#053A8A',
+        },
+        'brand-yellow': {
+          DEFAULT: '#FEC240',
+          hover: '#FDBB2A',
+          light: '#FECB5A',
+        },
       },
       keyframes: {
         'accordion-down': {
