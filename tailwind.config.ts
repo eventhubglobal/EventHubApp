@@ -9,6 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'mooli': ['var(--font-mooli)', 'sans-serif'],
+        'raleway': ['var(--font-raleway)', 'sans-serif'],
+        'asul': ['var(--font-asul)', 'serif'],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

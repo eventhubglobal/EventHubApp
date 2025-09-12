@@ -1,9 +1,25 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Mooli, Raleway, Asul } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 
-const inter = Inter({ subsets: ['latin'] });
+const mooli = Mooli({ 
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-mooli'
+});
+
+const raleway = Raleway({ 
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-raleway'
+});
+
+const asul = Asul({ 
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-asul'
+});
 
 export const metadata: Metadata = {
   title: 'Event Hub - Nigeria\'s Trusted Vendor Marketplace',
@@ -18,7 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${mooli.variable} ${raleway.variable} ${asul.variable} font-raleway`}>
         {children}
         <Toaster />
       </body>
