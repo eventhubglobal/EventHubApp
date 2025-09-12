@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Header } from '@/components/layout/header';
+import { HeaderWithModal } from '@/components/layout/header-with-modal';
 import { Footer } from '@/components/layout/footer';
 import { VendorFilters } from '@/components/vendors/vendor-filters';
 import { VendorGrid } from '@/components/vendors/vendor-grid';
@@ -19,7 +19,7 @@ export default function VendorsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <HeaderWithModal />
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">

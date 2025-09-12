@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/header';
+import { HeaderWithModal } from '@/components/layout/header-with-modal';
 import { Footer } from '@/components/layout/footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -53,7 +53,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <HeaderWithModal />
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
