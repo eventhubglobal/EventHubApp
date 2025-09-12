@@ -49,7 +49,7 @@ export function ContactFormSection() {
           {/* Right Side - Contact Information Text (40% width) */}
           <div className="lg:col-span-2 bg-white p-8 lg:p-12 flex flex-col justify-center rounded-r-2xl">
             <div className="w-full text-center">
-              <h1 className="text-3xl lg:text-4xl font-bold text-blue-900 mb-6 font-asul">
+              <h1 className="text-3xl lg:text-4xl font-bold text-brand-blue mb-6 font-asul">
                 We Are Just One Call Away!
               </h1>
               
@@ -140,7 +140,7 @@ export function ContactFormSection() {
               <Button
                 type="submit"
                 size="lg"
-                className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-12 py-3 w-[300px]"
+                className="bg-brand-blue hover:bg-brand-blue-hover text-white font-semibold px-12 py-3 w-[300px]"
               >
                 Send Message
               </Button>

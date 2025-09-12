@@ -53,7 +53,7 @@ export function Header({ onWaitlistOpen }: HeaderProps) {
                   href={item.href}
                   className={`font-medium transition-colors ${
                     isActive 
-                      ? 'text-blue-900' 
+                      ? 'text-brand-blue' 
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
@@ -66,7 +66,7 @@ export function Header({ onWaitlistOpen }: HeaderProps) {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
             <Button 
-              className="bg-blue-900 hover:bg-blue-800 text-white" 
+              className="bg-brand-blue hover:bg-brand-blue-hover text-white" 
               onClick={onWaitlistOpen}
             >
               Join Waitlist
@@ -103,7 +103,7 @@ export function Header({ onWaitlistOpen }: HeaderProps) {
                         href={item.href}
                         className={`font-medium p-3 rounded-lg transition-colors ${
                           isActive 
-                            ? 'text-blue-900 bg-blue-50' 
+                            ? 'text-brand-blue bg-brand-blue-light/10' 
                             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                         }`}
                         onClick={() => setIsOpen(false)}
@@ -116,7 +116,7 @@ export function Header({ onWaitlistOpen }: HeaderProps) {
 
                 <div className="flex flex-col space-y-3 pt-4 border-t border-gray-200">
                   <Button 
-                    className="bg-blue-900 hover:bg-blue-800 text-white" 
+                    className="bg-brand-blue hover:bg-brand-blue-hover text-white" 
                     onClick={() => {
                       onWaitlistOpen();
                       setIsOpen(false);

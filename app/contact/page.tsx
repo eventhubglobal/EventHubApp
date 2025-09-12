@@ -28,7 +28,7 @@ export default function Contact() {
                 const event = new CustomEvent('openWaitlist');
                 window.dispatchEvent(event);
               }}
-              className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors"
+              className="bg-brand-blue hover:bg-brand-blue-hover text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors"
             >
               Join Waitlist
             </button>

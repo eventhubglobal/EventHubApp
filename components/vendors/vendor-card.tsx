@@ -94,7 +94,7 @@ export function VendorCard({ vendor }: VendorCardProps) {
           </div>
           <div className="text-right">
             <div className="flex items-center gap-1 mb-1">
-              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <Star className="h-4 w-4 fill-brand-yellow text-brand-yellow" />
               <span className="text-sm font-medium">{vendor.rating}</span>
             </div>
             <p className="text-xs text-gray-500">({vendor.reviewCount} reviews)</p>

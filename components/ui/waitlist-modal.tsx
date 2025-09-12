@@ -72,13 +72,13 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
               onClick={() => setUserType('client')}
               className={`p-4 rounded-xl border-2 transition-all w-64 ${
                 userType === 'client'
-                  ? 'border-blue-900 bg-blue-50'
+                  ? 'border-brand-blue bg-brand-blue-light/10'
                   : 'border-gray-200 hover:border-gray-300'
               }`}
             >
               <div className="flex items-center space-x-3">
                 <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                  userType === 'client' ? 'bg-blue-900' : 'bg-gray-100'
+                  userType === 'client' ? 'bg-brand-blue' : 'bg-gray-100'
                 }`}>
                   <User className={`h-5 w-5 ${
                     userType === 'client' ? 'text-white' : 'text-gray-600'
@@ -86,7 +86,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 </div>
                 <div className="text-left">
                   <h3 className={`font-bold text-sm ${
-                    userType === 'client' ? 'text-blue-900' : 'text-gray-900'
+                    userType === 'client' ? 'text-brand-blue' : 'text-gray-900'
                   }`}>
                     Clients
                   </h3>
@@ -101,13 +101,13 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
               onClick={() => setUserType('vendor')}
               className={`p-4 rounded-xl border-2 transition-all w-64 ${
                 userType === 'vendor'
-                  ? 'border-blue-900 bg-blue-50'
+                  ? 'border-brand-blue bg-brand-blue-light/10'
                   : 'border-gray-200 hover:border-gray-300'
               }`}
             >
               <div className="flex items-center space-x-3">
                 <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                  userType === 'vendor' ? 'bg-blue-900' : 'bg-gray-100'
+                  userType === 'vendor' ? 'bg-brand-blue' : 'bg-gray-100'
                 }`}>
                   <Store className={`h-5 w-5 ${
                     userType === 'vendor' ? 'text-white' : 'text-gray-600'
@@ -115,7 +115,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 </div>
                 <div className="text-left">
                   <h3 className={`font-bold text-sm ${
-                    userType === 'vendor' ? 'text-blue-900' : 'text-gray-900'
+                    userType === 'vendor' ? 'text-brand-blue' : 'text-gray-900'
                   }`}>
                     Vendors
                   </h3>
@@ -213,7 +213,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         id="businessSize"
                         value={formData.businessSize}
                         onChange={(e) => handleInputChange('businessSize', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue appearance-none"
                       >
                         <option value="">Select choice</option>
                         <option value="solo">Solo Entrepreneur</option>
@@ -235,7 +235,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         id="servicesProvided"
                         value={formData.servicesProvided}
                         onChange={(e) => handleInputChange('servicesProvided', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue appearance-none"
                       >
                         <option value="">Select all that apply</option>
                         <option value="photography">Photography</option>
@@ -262,7 +262,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         id="eventTypes"
                         value={formData.eventTypes}
                         onChange={(e) => handleInputChange('eventTypes', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue appearance-none"
                       >
                         <option value="">Select all that apply</option>
                         <option value="wedding">Wedding</option>
@@ -285,7 +285,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         id="eventFrequency"
                         value={formData.eventFrequency}
                         onChange={(e) => handleInputChange('eventFrequency', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue appearance-none"
                       >
                         <option value="">Select frequency</option>
                         <option value="daily">Daily</option>
@@ -356,7 +356,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold h-12 text-lg"
+              className="w-full bg-brand-blue hover:bg-brand-blue-hover text-white font-semibold h-12 text-lg"
             >
               Join Waitlist
             </Button>
@@ -364,7 +364,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
           ) : (
             <div className="text-center py-12">
               <div className="text-gray-500 text-lg font-raleway">
-                Please select whether you are a <span className="font-semibold text-blue-900">Client</span> or <span className="font-semibold text-blue-900">Vendor</span> to continue
+                Please select whether you are a <span className="font-semibold text-brand-blue">Client</span> or <span className="font-semibold text-brand-blue">Vendor</span> to continue
               </div>
             </div>
           )}

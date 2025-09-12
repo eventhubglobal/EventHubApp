@@ -64,7 +64,7 @@ export function TestimonialsSection() {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-brand-blue mb-4">
             What Our Clients Say
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -84,7 +84,7 @@ export function TestimonialsSection() {
                 {/* Rating */}
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <Star key={i} className="h-4 w-4 fill-brand-yellow text-brand-yellow" />
                   ))}
                 </div>
 
@@ -109,7 +109,7 @@ export function TestimonialsSection() {
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <div className="font-semibold text-blue-900">{testimonial.name}</div>
+                    <div className="font-semibold text-brand-blue">{testimonial.name}</div>
                     <div className="text-sm text-gray-600">
                       {testimonial.role} • {testimonial.location}
                     </div>

@@ -19,7 +19,7 @@ export function QuickHelpSection() {
                 <div className="flex justify-center lg:justify-start">
                   <Button
                     size="lg"
-                    className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-3"
+                    className="bg-brand-blue hover:bg-brand-blue-hover text-white font-semibold px-8 py-3"
                   >
                     Chat with Our Agent
                   </Button>

@@ -9,15 +9,6 @@ export function Footer() {
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about' },
     { name: 'Contact Us', href: '/contact' },
-    { name: 'How it Works', href: '/how-it-works' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'News', href: '/news' },
-    { name: 'Our Team', href: '/team' },
-    { name: 'Investors', href: '/investors' },
-    { name: 'Help & Support', href: '/support' },
-    { name: 'Mediakit', href: '/mediakit' },
-    { name: 'FAQ', href: '/faq' },
-    { name: 'Careers', href: '/careers' },
   ];
 
   const legalLinks = [
@@ -34,7 +25,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-blue-900 text-white">
+    <footer className="bg-brand-blue text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-16">
@@ -69,21 +60,21 @@ export function Footer() {
                 <div className="flex flex-wrap items-center gap-6">
                   <div className="flex items-center space-x-2">
                     <div className="p-2 rounded-full bg-white">
-                      <Mail className="h-4 w-4 text-blue-900" />
+                      <Mail className="h-4 w-4 text-brand-blue" />
                     </div>
                     <span className="text-sm">info@eventhub.global</span>
                   </div>
 
                   <div className="flex items-center space-x-2">
                     <div className="p-2 rounded-full bg-white">
-                      <Phone className="h-4 w-4 text-blue-900" />
+                      <Phone className="h-4 w-4 text-brand-blue" />
                     </div>
-                    <span className="text-sm">+234 809 123 4567</span>
+                    <span className="text-sm">+234 707 469 9891</span>
                   </div>
 
                   <div className="flex items-center space-x-2">
                     <div className="p-2 rounded-full bg-white">
-                      <MapPin className="h-4 w-4 text-blue-900" />
+                      <MapPin className="h-4 w-4 text-brand-blue" />
                     </div>
                     <span className="text-sm">Lagos, Nigeria</span>
                   </div>
@@ -106,7 +97,7 @@ export function Footer() {
             </div>
 
             {/* Legal Information (narrower) */}
-            <div className="lg:col-span-2">
+            {/* <div className="lg:col-span-2">
               <h3 className="font-semibold mb-4 font-asul">Legal Information</h3>
               <ul className="space-y-2">
                 {legalLinks.map((link) => (
@@ -117,10 +108,10 @@ export function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
 
-            {/* Newsletter (spans remaining 3 cols) */}
-            <div className="lg:col-span-3">
+            {/* Newsletter (spans remaining 5 cols) */}
+            <div className="lg:col-span-5">
               <h3 className="font-semibold mb-3 font-asul">Subscribe Newsletter</h3>
               <p className="text-sm mb-6 font-raleway">Get the latest Vendor update & Event tips</p>
 
@@ -135,7 +126,7 @@ export function Footer() {
                   />
                   <button
                     type="submit"
-                    className="px-4 sm:px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold text-sm whitespace-nowrap flex-shrink-0"
+                    className="px-4 sm:px-6 py-3 bg-brand-yellow hover:bg-brand-yellow-hover text-gray-900 font-semibold text-sm whitespace-nowrap flex-shrink-0"
                   >
                     Subscribe
                   </button>
@@ -144,24 +135,23 @@ export function Footer() {
 
               {/* Social Media Icons */}
               <div className="flex items-center space-x-4">
-                <Link href="#" className="w-8 h-8 bg-blue-800 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                <Link href="https://www.facebook.com/eventhubglobal" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-brand-blue-light rounded-full flex items-center justify-center hover:bg-brand-blue-hover transition-colors">
                   <Facebook className="h-4 w-4 text-white" />
                   <span className="sr-only">Facebook</span>
                 </Link>
-                <Link href="#" className="w-8 h-8 rounded-full flex items-center justify-center hover:opacity-90 transition-opacity" style={{ background: 'linear-gradient(90deg,#f97316,#ec4899)' }}>
+                <Link href="https://www.instagram.com/eventhubglobal" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full flex items-center justify-center hover:opacity-90 transition-opacity" style={{ background: 'linear-gradient(90deg,#f97316,#ec4899)' }}>
                   <Instagram className="h-4 w-4 text-white" />
                   <span className="sr-only">Instagram</span>
                 </Link>
-                <Link href="#" className="w-8 h-8 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                <Link href="https://x.com/eventhubglobal" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
                   <Twitter className="h-4 w-4 text-white" />
                   <span className="sr-only">X (Twitter)</span>
                 </Link>
-                {/* Replace with a TikTok svg or image in your public folder */}
-                <Link href="#" className="w-8 h-8 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
-                  <img src="/tiktok.svg" alt="TikTok" className="h-4 w-4" />
+                <Link href="https://www.tiktok.com/@eventhubglobal" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                  <Image src="/tiktok.png" alt="TikTok" width={16} height={16} className="h-4 w-4" />
                   <span className="sr-only">TikTok</span>
                 </Link>
-                <Link href="#" className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
+                <Link href="https://www.youtube.com/@eventhubglobal" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
                   <Youtube className="h-4 w-4 text-white" />
                   <span className="sr-only">YouTube</span>
                 </Link>
@@ -171,7 +161,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Footer - Copyright */}
-        <div className="border-t border-blue-800 py-6">
+        <div className="border-t border-brand-blue-light py-6">
           <div className="text-center">
             <div className="text-sm">
               © 2025. EventHub. All right reserved.
