@@ -1,23 +1,29 @@
 import { HeroSection } from '@/components/sections/hero-section';
+import { StatsSection } from '@/components/sections/stats-section';
+import { BuiltForEveryoneSection } from '@/components/sections/built-for-everyone-section';
+import { FutureSection } from '@/components/sections/future-section';
 import { FeaturesSection } from '@/components/sections/features-section';
 import { CategoriesSection } from '@/components/sections/categories-section';
 import { HowItWorksSection } from '@/components/sections/how-it-works-section';
-import { TestimonialsSection } from '@/components/sections/testimonials-section';
-import { CTASection } from '@/components/sections/cta-section';
-import { Header } from '@/components/layout/header';
+import { TrustIndicatorsSection } from '@/components/sections/trust-indicators-section';
+import { CTABannerSection } from '@/components/sections/cta-banner-section';
+import { HeaderWithModal } from '@/components/layout/header-with-modal';
 import { Footer } from '@/components/layout/footer';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <HeaderWithModal />
       <main>
         <HeroSection />
+        <StatsSection />
+        <BuiltForEveryoneSection />
+        <FutureSection />
         <FeaturesSection />
         <CategoriesSection />
         <HowItWorksSection />
-        <TestimonialsSection />
-        <CTASection />
+        <TrustIndicatorsSection />
+        <CTABannerSection />
       </main>
       <Footer />
     </div>

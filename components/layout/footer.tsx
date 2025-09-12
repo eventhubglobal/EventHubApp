@@ -1,81 +1,103 @@
+'use client';
+
 import Link from 'next/link';
-import { Calendar, Mail, Phone, MapPin, Instagram, Twitter, Facebook } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import Image from 'next/image';
+import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 
 export function Footer() {
-  const footerLinks = {
-    platform: [
-      { name: 'Browse Vendors', href: '/vendors' },
-      { name: 'Post Request', href: '/post-request' },
-      { name: 'How It Works', href: '/how-it-works' },
-      { name: 'Pricing', href: '/pricing' },
-    ],
-    support: [
-      { name: 'Help Center', href: '/help' },
-      { name: 'Contact Us', href: '/contact' },
-      { name: 'Safety Guidelines', href: '/safety' },
-      { name: 'Dispute Resolution', href: '/disputes' },
-    ],
-    legal: [
-      { name: 'Terms of Service', href: '/terms' },
-      { name: 'Privacy Policy', href: '/privacy' },
-      { name: 'Cookie Policy', href: '/cookies' },
-      { name: 'Vendor Agreement', href: '/vendor-terms' },
-    ],
-    categories: [
-      { name: 'Event Decorators', href: '/vendors?category=decorators' },
-      { name: 'Catering Services', href: '/vendors?category=catering' },
-      { name: 'Photography', href: '/vendors?category=photography' },
-      { name: 'Event Planning', href: '/vendors?category=planning' },
-    ]
-  };
+  const quickLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Contact Us', href: '/contact' },
+    { name: 'How it Works', href: '/how-it-works' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'News', href: '/news' },
+    { name: 'Our Team', href: '/team' },
+    { name: 'Investors', href: '/investors' },
+    { name: 'Help & Support', href: '/support' },
+    { name: 'Mediakit', href: '/mediakit' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'Careers', href: '/careers' },
+  ];
+
+  const legalLinks = [
+    { name: 'Privacy Policy', href: '/privacy' },
+    { name: 'Payment Policy', href: '/payment-policy' },
+    { name: 'Vendor Agreement', href: '/vendor-agreement' },
+    { name: 'Client Agreement', href: '/client-agreement' },
+    { name: 'Event Insurance', href: '/event-insurance' },
+    { name: 'Safety Guidelines', href: '/safety-guidelines' },
+    { name: 'Dispute Resolution', href: '/dispute-resolution' },
+    { name: 'Terms & Condition', href: '/terms' },
+    { name: 'Refunds & Claims policy', href: '/refunds' },
+    { name: 'Cookie Policy', href: '/cookies' },
+  ];
 
   return (
-    <footer className="bg-slate-900 text-slate-300">
+    <footer className="bg-blue-900 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
-            {/* Brand Section */}
-            <div className="lg:col-span-2">
-              <Link href="/" className="flex items-center space-x-2 mb-4">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <Calendar className="h-5 w-5" />
-                </div>
-                <span className="font-bold text-xl text-white">Event Hub</span>
+          {/* Use a 12-col grid so the left side can be wider */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-12">
+            {/* Left Section - wider (spans 5 of 12 on large screens) */}
+            <div className="lg:col-span-5">
+              <Link href="/" className="block mb-6">
+                <Image
+                  src="/images/FooterLogo.png"
+                  alt="EventHub Logo"
+                  width={150}
+                  height={50}
+                  className=""
+                  priority
+                />
               </Link>
-              <p className="text-slate-400 mb-6 max-w-sm">
-                Nigeria's most trusted vendor marketplace. Discover, verify, and book reliable event service providers with confidence.
-              </p>
-              
-              {/* Contact Info */}
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <Mail className="h-4 w-4" />
-                  <span className="text-sm">hello@eventhub.ng</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="h-4 w-4" />
-                  <span className="text-sm">+234 809 123 4567</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <MapPin className="h-4 w-4" />
-                  <span className="text-sm">Lagos, Nigeria</span>
+
+              <div className="text-sm leading-relaxed font-raleway max-w-md">
+                <p className="mb-4">
+                  Event Hub is a trusted digital marketplace in Nigeria that simplifies discovering, verifying, booking,
+                  and coordinating event service providers like caterers, photographers, decorators, and wedding dress vendors.
+                </p>
+                <p className="mb-4">
+                  It offers seamless service discovery, secure payments, trusted reviews, verified profiles, and transparent
+                  communication—all in one app.
+                </p>
+              </div>
+
+              {/* Contact Info: horizontal / side-by-side */}
+              <div className="mt-6">
+                <div className="flex flex-wrap items-center gap-6">
+                  <div className="flex items-center space-x-2">
+                    <div className="p-2 rounded-full bg-white">
+                      <Mail className="h-4 w-4 text-blue-900" />
+                    </div>
+                    <span className="text-sm">info@eventhub.global</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <div className="p-2 rounded-full bg-white">
+                      <Phone className="h-4 w-4 text-blue-900" />
+                    </div>
+                    <span className="text-sm">+234 809 123 4567</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <div className="p-2 rounded-full bg-white">
+                      <MapPin className="h-4 w-4 text-blue-900" />
+                    </div>
+                    <span className="text-sm">Lagos, Nigeria</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Platform Links */}
-            <div>
-              <h3 className="font-semibold text-white mb-4">Platform</h3>
+            {/* Quick Links (narrower) */}
+            <div className="lg:col-span-2">
+              <h3 className="font-semibold mb-4 font-asul">Quick Links</h3>
               <ul className="space-y-2">
-                {footerLinks.platform.map((link) => (
+                {quickLinks.map((link) => (
                   <li key={link.name}>
-                    <Link 
-                      href={link.href}
-                      className="text-sm hover:text-primary transition-colors"
-                    >
+                    <Link href={link.href} className="text-sm hover:text-gray-300 transition-colors">
                       {link.name}
                     </Link>
                   </li>
@@ -83,16 +105,13 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Categories */}
-            <div>
-              <h3 className="font-semibold text-white mb-4">Categories</h3>
+            {/* Legal Information (narrower) */}
+            <div className="lg:col-span-2">
+              <h3 className="font-semibold mb-4 font-asul">Legal Information</h3>
               <ul className="space-y-2">
-                {footerLinks.categories.map((link) => (
+                {legalLinks.map((link) => (
                   <li key={link.name}>
-                    <Link 
-                      href={link.href}
-                      className="text-sm hover:text-primary transition-colors"
-                    >
+                    <Link href={link.href} className="text-sm hover:text-gray-300 transition-colors">
                       {link.name}
                     </Link>
                   </li>
@@ -100,81 +119,62 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Support */}
-            <div>
-              <h3 className="font-semibold text-white mb-4">Support</h3>
-              <ul className="space-y-2">
-                {footerLinks.support.map((link) => (
-                  <li key={link.name}>
-                    <Link 
-                      href={link.href}
-                      className="text-sm hover:text-primary transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Newsletter (spans remaining 3 cols) */}
+            <div className="lg:col-span-3">
+              <h3 className="font-semibold mb-3 font-asul">Subscribe Newsletter</h3>
+              <p className="text-sm mb-6 font-raleway">Get the latest Vendor update & Event tips</p>
 
-            {/* Legal */}
-            <div>
-              <h3 className="font-semibold text-white mb-4">Legal</h3>
-              <ul className="space-y-2">
-                {footerLinks.legal.map((link) => (
-                  <li key={link.name}>
-                    <Link 
-                      href={link.href}
-                      className="text-sm hover:text-primary transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              {/* Newsletter form: white rounded input + yellow pill Subscribe button */}
+              <form onSubmit={(e) => e.preventDefault()} className="mb-8">
+                <div className="flex w-full max-w-md bg-white rounded-md overflow-hidden shadow-sm">
+                  <input
+                    type="email"
+                    aria-label="Email address"
+                    placeholder="Enter email address"
+                    className="flex-1 px-3 sm:px-4 py-3 text-gray-700 placeholder-gray-400 border-none outline-none text-sm min-w-0"
+                  />
+                  <button
+                    type="submit"
+                    className="px-4 sm:px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold text-sm whitespace-nowrap flex-shrink-0"
+                  >
+                    Subscribe
+                  </button>
+                </div>
+              </form>
+
+              {/* Social Media Icons */}
+              <div className="flex items-center space-x-4">
+                <Link href="#" className="w-8 h-8 bg-blue-800 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                  <Facebook className="h-4 w-4 text-white" />
+                  <span className="sr-only">Facebook</span>
+                </Link>
+                <Link href="#" className="w-8 h-8 rounded-full flex items-center justify-center hover:opacity-90 transition-opacity" style={{ background: 'linear-gradient(90deg,#f97316,#ec4899)' }}>
+                  <Instagram className="h-4 w-4 text-white" />
+                  <span className="sr-only">Instagram</span>
+                </Link>
+                <Link href="#" className="w-8 h-8 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                  <Twitter className="h-4 w-4 text-white" />
+                  <span className="sr-only">X (Twitter)</span>
+                </Link>
+                {/* Replace with a TikTok svg or image in your public folder */}
+                <Link href="#" className="w-8 h-8 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                  <img src="/tiktok.svg" alt="TikTok" className="h-4 w-4" />
+                  <span className="sr-only">TikTok</span>
+                </Link>
+                <Link href="#" className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
+                  <Youtube className="h-4 w-4 text-white" />
+                  <span className="sr-only">YouTube</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Newsletter Section */}
-        <div className="border-t border-slate-800 py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="mb-4 md:mb-0">
-              <h3 className="font-semibold text-white mb-2">Stay Updated</h3>
-              <p className="text-sm text-slate-400">Get the latest vendor updates and event tips.</p>
-            </div>
-            <div className="flex w-full md:w-auto space-x-2">
-              <Input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="w-full md:w-64 bg-slate-800 border-slate-700 text-white placeholder-slate-400"
-              />
-              <Button>Subscribe</Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Footer */}
-        <div className="border-t border-slate-800 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="text-sm text-slate-400 mb-4 md:mb-0">
-              © 2025 Event Hub. All rights reserved.
-            </div>
-            
-            {/* Social Links */}
-            <div className="flex items-center space-x-4">
-              <Link href="#" className="text-slate-400 hover:text-primary transition-colors">
-                <Instagram className="h-5 w-5" />
-                <span className="sr-only">Instagram</span>
-              </Link>
-              <Link href="#" className="text-slate-400 hover:text-primary transition-colors">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </Link>
-              <Link href="#" className="text-slate-400 hover:text-primary transition-colors">
-                <Facebook className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
-              </Link>
+        {/* Bottom Footer - Copyright */}
+        <div className="border-t border-blue-800 py-6">
+          <div className="text-center">
+            <div className="text-sm">
+              © 2025. EventHub. All right reserved.
             </div>
           </div>
         </div>
