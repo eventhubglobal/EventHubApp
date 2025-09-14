@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { 
   Palette, 
   UtensilsCrossed, 
@@ -125,7 +124,7 @@ export function CategoriesSection() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           {categories.map((category, index) => (
-            <Link key={index} href={category.href} className="group">
+            <div key={index} className="group">
               <Card className="hover-lift border border-gray-200 shadow-sm group-hover:shadow-lg transition-all duration-300 bg-white overflow-hidden">
                 <div className="relative h-32">
                   <img
@@ -151,7 +150,7 @@ export function CategoriesSection() {
                   </h3>
                 </CardContent>
               </Card>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
