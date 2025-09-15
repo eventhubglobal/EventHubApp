@@ -25,6 +25,14 @@ export const metadata: Metadata = {
   title: 'Event Hub - Nigeria\'s Trusted Vendor Marketplace',
   description: 'Discover, verify, and book trusted event vendors in Nigeria. From caterers to photographers, find reliable service providers for your events.',
   keywords: 'Nigeria, events, vendors, marketplace, catering, photography, decorators, wedding, party planning',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' }
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
