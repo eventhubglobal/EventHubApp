@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { X, User, Store, ChevronDown } from 'lucide-react';
+import { X, User, Store, ChevronDown, CheckCircle, AlertCircle, Wifi, WifiOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
+import { WaitlistApiService, WaitlistClientData, WaitlistVendorData } from '@/lib/api';
 
 interface WaitlistModalProps {
   isOpen: boolean;
@@ -15,17 +16,20 @@ interface WaitlistModalProps {
 
 export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const [userType, setUserType] = useState<'client' | 'vendor' | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
+    phone: '', // Added phone number field
     company: '',
-    phone: '',
-    businessSize: '',
-    servicesProvided: '',
     location: '',
-    eventTypes: '',
+    eventTypes: [] as string[], // Changed to array
     eventFrequency: '',
+    businessSize: '', // Added back for vendors
     excitedFeatures: '',
     updates: true,
     betaTesting: false
@@ -35,14 +39,120 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleEventTypeChange = (eventType: string, checked: boolean) => {
+    setFormData(prev => ({
+      ...prev,
+      eventTypes: checked 
+        ? [...prev.eventTypes, eventType]
+        : prev.eventTypes.filter(type => type !== eventType)
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', { userType, ...formData });
-    onClose();
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      if (userType === 'client') {
+        // UPDATED: Phone field added for client submissions
+        const clientData: WaitlistClientData = {
+          firstName: formData.firstName.trim(),
+          lastName: formData.lastName.trim(),
+          email: formData.email.trim(),
+          companyOrganization: formData.company.trim(),
+          phoneNumber: formData.phone.trim(), // Added phone number
+          location: formData.location.trim(),
+          eventTypes: formData.eventTypes, // Already an array
+          eventFrequency: formData.eventFrequency,
+          excitedFeatures: formData.excitedFeatures.trim(),
+          receiveUpdates: formData.updates,
+          betaTester: formData.betaTesting
+        };
+        
+        console.log('Sending client data:', clientData);
+        console.log('Client data JSON:', JSON.stringify(clientData, null, 2));
+        console.log('Timestamp:', new Date().toISOString());
+        await WaitlistApiService.addClientToWaitlist(clientData);
+      } else if (userType === 'vendor') {
+        // UPDATED: Vendor data structure to match API requirements
+        const vendorData: WaitlistVendorData = {
+          firstName: formData.firstName.trim(),
+          lastName: formData.lastName.trim(),
+          email: formData.email.trim(),
+          companyOrganization: formData.company.trim(),
+          phoneNumber: formData.phone.trim(), // Added phone number
+          location: formData.location.trim(),
+          eventTypes: formData.eventTypes, // Service categories like "Catering & Drinks"
+          eventFrequency: formData.eventFrequency, // Required by API
+          businessSize: formData.businessSize, // Required by API
+          excitedFeatures: formData.excitedFeatures.trim(),
+          receiveUpdates: formData.updates,
+          betaTester: formData.betaTesting
+        };
+        
+        console.log('Sending vendor data:', vendorData);
+        console.log('Vendor data JSON:', JSON.stringify(vendorData, null, 2));
+        await WaitlistApiService.addVendorToWaitlist(vendorData);
+      }
+
+      setIsSuccess(true);
+      // Reset form after successful submission
+      setTimeout(() => {
+        setIsSuccess(false);
+        onClose();
+        // Reset form data
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '', // Reset phone field
+          company: '',
+          location: '',
+          eventTypes: [], // Reset to empty array
+          eventFrequency: '',
+          businessSize: '', // Reset business size
+          excitedFeatures: '',
+          updates: true,
+          betaTesting: false
+        });
+        setUserType(null);
+      }, 2000);
+    } catch (err) {
+      console.error('Waitlist submission error:', err);
+      const errorMessage = err instanceof Error ? err.message : 'Failed to join waitlist. Please try again.';
+      setError(errorMessage);
+      
+      // Show error for 5 seconds, then clear it
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!isOpen) return null;
+
+  // Show success state
+  if (isSuccess) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+        <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center">
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+              <CheckCircle className="h-8 w-8 text-green-600" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Success!</h2>
+          <p className="text-gray-600 mb-6">
+            You've been successfully added to our waitlist. We'll be in touch soon!
+          </p>
+          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-brand-blue mx-auto"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
@@ -58,9 +168,24 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         <div className="p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2 font-asul">
-              Join Our Waitlist!
-            </h2>
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <h2 className="text-3xl font-bold text-gray-900 font-asul">
+                Join Our Waitlist!
+              </h2>
+              <div className="flex items-center gap-1 text-xs">
+                {isOnline ? (
+                  <>
+                    <Wifi className="h-3 w-3 text-green-600" />
+                    <span className="text-green-600">Online</span>
+                  </>
+                ) : (
+                  <>
+                    <WifiOff className="h-3 w-3 text-red-600" />
+                    <span className="text-red-600">Offline</span>
+                  </>
+                )}
+              </div>
+            </div>
             <p className="text-gray-600 font-raleway">
               Be among the first to revolutionize your event management experience
             </p>
@@ -174,39 +299,79 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 />
               </div>
 
+              {/* Phone Number */}
+              <div>
+                <Label htmlFor="phone" className="text-sm font-medium text-gray-700 mb-2 block">
+                  Phone Number *
+                </Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="Enter your phone number"
+                  value={formData.phone}
+                  onChange={(e) => handleInputChange('phone', e.target.value)}
+                  required
+                />
+              </div>
+
               {/* Company/Organization */}
               <div>
                 <Label htmlFor="company" className="text-sm font-medium text-gray-700 mb-2 block">
-                  Company/Organization
+                  Company/Organization *
                 </Label>
                 <Input
                   id="company"
                   placeholder="Enter your company/organization"
                   value={formData.company}
                   onChange={(e) => handleInputChange('company', e.target.value)}
+                  required
                 />
               </div>
 
-              {/* Phone Number */}
-              <div>
-                <Label htmlFor="phone" className="text-sm font-medium text-gray-700 mb-2 block">
-                  Phone Number
-                </Label>
-                <Input
-                  id="phone"
-                  placeholder="Enter your phone number"
-                  value={formData.phone}
-                  onChange={(e) => handleInputChange('phone', e.target.value)}
-                />
-              </div>
 
               {/* Conditional Fields Based on User Type */}
               {userType === 'vendor' ? (
                 <>
+                  {/* Service Categories - Vendor Only */}
+                  <div>
+                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
+                      Services You Provide *
+                    </Label>
+                    <div className="space-y-2">
+                      {[
+                        { value: 'Catering & Drinks', label: 'Catering & Drinks' },
+                        { value: 'Entertainment', label: 'Entertainment' },
+                        { value: 'Rentals & Equipment', label: 'Rentals & Equipment' },
+                        { value: 'Photography & Videography', label: 'Photography & Videography' },
+                        { value: 'Decoration & Setup', label: 'Decoration & Setup' },
+                        { value: 'Media & Content', label: 'Media & Content' },
+                        { value: 'Beauty & Grooming', label: 'Beauty & Grooming' },
+                        { value: 'Event Support Services', label: 'Event Support Services' },
+                        { value: 'Fashion & Styling', label: 'Fashion & Styling' },
+                        { value: 'Logistics & Miscellaneous', label: 'Logistics & Miscellaneous' },
+                        { value: 'Venue Providers', label: 'Venue Providers' },
+                        { value: 'Event Materials', label: 'Event Materials' },
+                        { value: 'Kids & Special Fun Vendors', label: 'Kids & Special Fun Vendors' },
+                        { value: 'Content Creators', label: 'Content Creators' }
+                      ].map((option) => (
+                        <div key={option.value} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={`vendor-service-${option.value}`}
+                            checked={formData.eventTypes.includes(option.value)}
+                            onCheckedChange={(checked) => handleEventTypeChange(option.value, checked as boolean)}
+                          />
+                          <Label htmlFor={`vendor-service-${option.value}`} className="text-sm text-gray-700">
+                            {option.label}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                   {/* Business Size - Vendor Only */}
                   <div>
                     <Label htmlFor="businessSize" className="text-sm font-medium text-gray-700 mb-2 block">
-                      Business Size
+                      Business Size *
                     </Label>
                     <div className="relative">
                       <select
@@ -214,37 +379,37 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         value={formData.businessSize}
                         onChange={(e) => handleInputChange('businessSize', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue appearance-none"
+                        required
                       >
-                        <option value="">Select choice</option>
-                        <option value="solo">Solo Entrepreneur</option>
-                        <option value="small">Small Team (2-5 people)</option>
-                        <option value="medium">Medium Team (6-20 people)</option>
-                        <option value="large">Large Team (20+ people)</option>
+                        <option value="">Select business size</option>
+                        <option value="solo entrepreneur">Solo Entrepreneur</option>
+                        <option value="small business (2-10 people)">Small Business (2-10 people)</option>
+                        <option value="medium business (11-50 people)">Medium Business (11-50 people)</option>
+                        <option value="large business (50+ people)">Large Business (50+ people)</option>
                       </select>
                       <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
                     </div>
                   </div>
 
-                  {/* Services You Provide - Vendor Only */}
+                  {/* Event Frequency - Vendor Only */}
                   <div>
-                    <Label htmlFor="servicesProvided" className="text-sm font-medium text-gray-700 mb-2 block">
-                      Services You Provide
+                    <Label htmlFor="vendorEventFrequency" className="text-sm font-medium text-gray-700 mb-2 block">
+                      How often do you work on events? *
                     </Label>
                     <div className="relative">
                       <select
-                        id="servicesProvided"
-                        value={formData.servicesProvided}
-                        onChange={(e) => handleInputChange('servicesProvided', e.target.value)}
+                        id="vendorEventFrequency"
+                        value={formData.eventFrequency}
+                        onChange={(e) => handleInputChange('eventFrequency', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue appearance-none"
+                        required
                       >
-                        <option value="">Select all that apply</option>
-                        <option value="photography">Photography</option>
-                        <option value="catering">Catering</option>
-                        <option value="decoration">Decoration</option>
-                        <option value="music">Music & Entertainment</option>
-                        <option value="venue">Venue Rental</option>
-                        <option value="planning">Event Planning</option>
-                        <option value="other">Other</option>
+                        <option value="">Select frequency</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="annually">Annually</option>
+                        <option value="as needed">As Needed</option>
                       </select>
                       <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
                     </div>
@@ -254,31 +419,35 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 <>
                   {/* Event Types - Client Only */}
                   <div>
-                    <Label htmlFor="eventTypes" className="text-sm font-medium text-gray-700 mb-2 block">
-                      Types of Events You organize
+                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
+                      Types of Events You organize *
                     </Label>
-                    <div className="relative">
-                      <select
-                        id="eventTypes"
-                        value={formData.eventTypes}
-                        onChange={(e) => handleInputChange('eventTypes', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue appearance-none"
-                      >
-                        <option value="">Select all that apply</option>
-                        <option value="wedding">Wedding</option>
-                        <option value="corporate">Corporate Events</option>
-                        <option value="birthday">Birthday Parties</option>
-                        <option value="conference">Conferences</option>
-                        <option value="other">Other</option>
-                      </select>
-                      <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+                    <div className="space-y-2">
+                      {[
+                        { value: 'Social Events (Weddings, Birthday Parties, etc.)', label: 'Social Events (Weddings, Birthday Parties, etc.)' },
+                        { value: 'Corporate Events (Product Launches, Conferences, etc.)', label: 'Corporate Events (Product Launches, Conferences, etc.)' },
+                        { value: 'Community Events (Charity, Fundraisers, etc.)', label: 'Community Events (Charity, Fundraisers, etc.)' },
+                        { value: 'Private/Intimate Events (Proposal, Family Dinner, etc.)', label: 'Private/Intimate Events (Proposal, Family Dinner, etc.)' },
+                        { value: 'Public/Entertainment Events (Concerts, Festivals, etc.)', label: 'Public/Entertainment Events (Concerts, Festivals, etc.)' }
+                      ].map((option) => (
+                        <div key={option.value} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={`eventType-${option.value}`}
+                            checked={formData.eventTypes.includes(option.value)}
+                            onCheckedChange={(checked) => handleEventTypeChange(option.value, checked as boolean)}
+                          />
+                          <Label htmlFor={`eventType-${option.value}`} className="text-sm text-gray-700">
+                            {option.label}
+                          </Label>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
                   {/* Event Frequency - Client Only */}
                   <div>
                     <Label htmlFor="eventFrequency" className="text-sm font-medium text-gray-700 mb-2 block">
-                      How often do you plan events?
+                      How often do you plan events? *
                     </Label>
                     <div className="relative">
                       <select
@@ -286,13 +455,14 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         value={formData.eventFrequency}
                         onChange={(e) => handleInputChange('eventFrequency', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue appearance-none"
+                        required
                       >
                         <option value="">Select frequency</option>
-                        <option value="daily">Daily</option>
                         <option value="weekly">Weekly</option>
                         <option value="monthly">Monthly</option>
                         <option value="quarterly">Quarterly</option>
-                        <option value="yearly">Yearly</option>
+                        <option value="annually">Annually</option>
+                        <option value="as needed">As Needed</option>
                       </select>
                       <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
                     </div>
@@ -303,13 +473,14 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
               {/* Location */}
               <div>
                 <Label htmlFor="location" className="text-sm font-medium text-gray-700 mb-2 block">
-                  Location/City
+                  Location/City *
                 </Label>
                 <Input
                   id="location"
                   placeholder="Enter your location"
                   value={formData.location}
                   onChange={(e) => handleInputChange('location', e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -317,7 +488,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
             {/* Excited Features */}
             <div>
               <Label htmlFor="excitedFeatures" className="text-sm font-medium text-gray-700 mb-2 block">
-                What features are you most excited about?
+                What features are you most excited about? *
               </Label>
               <Textarea
                 id="excitedFeatures"
@@ -325,6 +496,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 value={formData.excitedFeatures}
                 onChange={(e) => handleInputChange('excitedFeatures', e.target.value)}
                 rows={4}
+                required
               />
             </div>
 
@@ -353,12 +525,67 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
               </div>
             </div>
 
+            {/* Error Display */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-start space-x-3">
+                <AlertCircle className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
+                <div className="flex-1">
+                  <h3 className="text-sm font-medium text-red-800">Error</h3>
+                  <p className="text-sm text-red-700 mt-1">{error}</p>
+                  {error.includes('connect') || error.includes('connection') ? (
+                    <div className="mt-3">
+                      <p className="text-xs text-red-600 mb-2">
+                        This might be a temporary connection issue. You can:
+                      </p>
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            setError(null);
+                            handleSubmit(new Event('submit') as any);
+                          }}
+                          className="text-red-700 border-red-300 hover:bg-red-50"
+                        >
+                          Try Again
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            setError(null);
+                            // Copy form data to clipboard as fallback
+                            const formText = `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCompany: ${formData.company}\nLocation: ${formData.location}\nUser Type: ${userType}`;
+                            navigator.clipboard.writeText(formText);
+                            alert('Form data copied to clipboard. You can email it to us directly.');
+                          }}
+                          className="text-red-700 border-red-300 hover:bg-red-50"
+                        >
+                          Copy Details
+                        </Button>
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+            )}
+
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full bg-brand-blue hover:bg-brand-blue-hover text-white font-semibold h-12 text-lg"
+              disabled={isLoading}
+              className="w-full bg-brand-blue hover:bg-brand-blue-hover text-white font-semibold h-12 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Join Waitlist
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                  Joining Waitlist...
+                </div>
+              ) : (
+                'Join Waitlist'
+              )}
             </Button>
           </form>
           ) : (
