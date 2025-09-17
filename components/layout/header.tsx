@@ -33,12 +33,22 @@ export function Header({ onWaitlistOpen }: HeaderProps) {
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
+            {/* Desktop Logo - hidden on small screens */}
             <Image
               src="/images/Logo.png"
               alt="EventHub Logo"
               width={150}
               height={50}
-              className=""
+              className="hidden sm:block"
+              priority
+            />
+            {/* Mobile Logo - shown only on small screens */}
+            <Image
+              src="/icon-1.png"
+              alt="EventHub Logo"
+              width={40}
+              height={40}
+              className="block sm:hidden"
               priority
             />
           </Link>
@@ -85,9 +95,9 @@ export function Header({ onWaitlistOpen }: HeaderProps) {
               <div className="flex flex-col space-y-4 mt-6">
                 <Link href="/" className="flex items-center space-x-3 pb-4 border-b border-gray-200">
                   <Image
-                    src="/images/Logo.png"
+                    src="/icon-1.png"
                     alt="EventHub Logo"
-                    width={120}
+                    width={40}
                     height={40}
                     className="h-10 w-auto"
                     priority
