@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { WaitlistApiService, WaitlistClientData, WaitlistVendorData } from '@/lib/api';
 
 interface WaitlistModalProps {
@@ -27,7 +29,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     phone: '', // Added phone number field
     company: '',
     location: '',
-    eventTypes: [] as string[], // Changed to array
+    eventTypes: [] as string[], // Changed back to array for multi-select
     eventFrequency: '',
     businessSize: '', // Added back for vendors
     excitedFeatures: '',
@@ -47,6 +49,24 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         : prev.eventTypes.filter(type => type !== eventType)
     }));
   };
+
+  const resetFormData = () => {
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      company: '',
+      location: '',
+      eventTypes: [],
+      eventFrequency: '',
+      businessSize: '',
+      excitedFeatures: '',
+      updates: true,
+      betaTesting: false
+    });
+  };
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,7 +103,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
           companyOrganization: formData.company.trim(),
           phoneNumber: formData.phone.trim(), // Added phone number
           location: formData.location.trim(),
-          eventTypes: formData.eventTypes, // Service categories like "Catering & Drinks"
+          eventTypes: formData.eventTypes, // Already an array
           eventFrequency: formData.eventFrequency, // Required by API
           businessSize: formData.businessSize, // Required by API
           excitedFeatures: formData.excitedFeatures.trim(),
@@ -194,7 +214,12 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
           {/* User Type Selection */}
           <div className="flex justify-center gap-4 mb-8">
             <button
-              onClick={() => setUserType('client')}
+              onClick={() => {
+                if (userType !== 'client') {
+                  resetFormData();
+                }
+                setUserType('client');
+              }}
               className={`p-4 rounded-xl border-2 transition-all w-64 ${
                 userType === 'client'
                   ? 'border-brand-blue bg-brand-blue-light/10'
@@ -223,7 +248,12 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
             </button>
 
             <button
-              onClick={() => setUserType('vendor')}
+              onClick={() => {
+                if (userType !== 'vendor') {
+                  resetFormData();
+                }
+                setUserType('vendor');
+              }}
               className={`p-4 rounded-xl border-2 transition-all w-64 ${
                 userType === 'vendor'
                   ? 'border-brand-blue bg-brand-blue-light/10'
@@ -334,38 +364,55 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 <>
                   {/* Service Categories - Vendor Only */}
                   <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
+                    <Label htmlFor="vendorServices" className="text-sm font-medium text-gray-700 mb-2 block">
                       Services You Provide *
                     </Label>
-                    <div className="space-y-2">
-                      {[
-                        { value: 'Catering & Drinks', label: 'Catering & Drinks' },
-                        { value: 'Entertainment', label: 'Entertainment' },
-                        { value: 'Rentals & Equipment', label: 'Rentals & Equipment' },
-                        { value: 'Photography & Videography', label: 'Photography & Videography' },
-                        { value: 'Decoration & Setup', label: 'Decoration & Setup' },
-                        { value: 'Media & Content', label: 'Media & Content' },
-                        { value: 'Beauty & Grooming', label: 'Beauty & Grooming' },
-                        { value: 'Event Support Services', label: 'Event Support Services' },
-                        { value: 'Fashion & Styling', label: 'Fashion & Styling' },
-                        { value: 'Logistics & Miscellaneous', label: 'Logistics & Miscellaneous' },
-                        { value: 'Venue Providers', label: 'Venue Providers' },
-                        { value: 'Event Materials', label: 'Event Materials' },
-                        { value: 'Kids & Special Fun Vendors', label: 'Kids & Special Fun Vendors' },
-                        { value: 'Content Creators', label: 'Content Creators' }
-                      ].map((option) => (
-                        <div key={option.value} className="flex items-center space-x-2">
-                          <Checkbox
-                            id={`vendor-service-${option.value}`}
-                            checked={formData.eventTypes.includes(option.value)}
-                            onCheckedChange={(checked) => handleEventTypeChange(option.value, checked as boolean)}
-                          />
-                          <Label htmlFor={`vendor-service-${option.value}`} className="text-sm text-gray-700">
-                            {option.label}
-                          </Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          role="combobox"
+                          className="w-full justify-between"
+                        >
+                          {formData.eventTypes.length > 0 
+                            ? `${formData.eventTypes.length} service${formData.eventTypes.length > 1 ? 's' : ''} selected`
+                            : "Select services you provide"
+                          }
+                          <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-full p-0" align="start">
+                        <div className="max-h-60 overflow-auto p-2">
+                          {[
+                            { value: 'Catering & Drinks', label: 'Catering & Drinks' },
+                            { value: 'Entertainment', label: 'Entertainment' },
+                            { value: 'Rentals & Equipment', label: 'Rentals & Equipment' },
+                            { value: 'Photography & Videography', label: 'Photography & Videography' },
+                            { value: 'Decoration & Setup', label: 'Decoration & Setup' },
+                            { value: 'Media & Content', label: 'Media & Content' },
+                            { value: 'Beauty & Grooming', label: 'Beauty & Grooming' },
+                            { value: 'Event Support Services', label: 'Event Support Services' },
+                            { value: 'Fashion & Styling', label: 'Fashion & Styling' },
+                            { value: 'Logistics & Miscellaneous', label: 'Logistics & Miscellaneous' },
+                            { value: 'Venue Providers', label: 'Venue Providers' },
+                            { value: 'Event Materials', label: 'Event Materials' },
+                            { value: 'Kids & Special Fun Vendors', label: 'Kids & Special Fun Vendors' },
+                            { value: 'Content Creators', label: 'Content Creators' }
+                          ].map((option) => (
+                            <div key={option.value} className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded">
+                              <Checkbox
+                                id={`vendor-service-${option.value}`}
+                                checked={formData.eventTypes.includes(option.value)}
+                                onCheckedChange={(checked) => handleEventTypeChange(option.value, checked as boolean)}
+                              />
+                              <Label htmlFor={`vendor-service-${option.value}`} className="text-sm text-gray-700 cursor-pointer">
+                                {option.label}
+                              </Label>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
+                      </PopoverContent>
+                    </Popover>
                   </div>
 
                   {/* Business Size - Vendor Only */}
@@ -419,29 +466,46 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 <>
                   {/* Event Types - Client Only */}
                   <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
+                    <Label htmlFor="clientEventTypes" className="text-sm font-medium text-gray-700 mb-2 block">
                       Types of Events You organize *
                     </Label>
-                    <div className="space-y-2">
-                      {[
-                        { value: 'Social Events (Weddings, Birthday Parties, etc.)', label: 'Social Events (Weddings, Birthday Parties, etc.)' },
-                        { value: 'Corporate Events (Product Launches, Conferences, etc.)', label: 'Corporate Events (Product Launches, Conferences, etc.)' },
-                        { value: 'Community Events (Charity, Fundraisers, etc.)', label: 'Community Events (Charity, Fundraisers, etc.)' },
-                        { value: 'Private/Intimate Events (Proposal, Family Dinner, etc.)', label: 'Private/Intimate Events (Proposal, Family Dinner, etc.)' },
-                        { value: 'Public/Entertainment Events (Concerts, Festivals, etc.)', label: 'Public/Entertainment Events (Concerts, Festivals, etc.)' }
-                      ].map((option) => (
-                        <div key={option.value} className="flex items-center space-x-2">
-                          <Checkbox
-                            id={`eventType-${option.value}`}
-                            checked={formData.eventTypes.includes(option.value)}
-                            onCheckedChange={(checked) => handleEventTypeChange(option.value, checked as boolean)}
-                          />
-                          <Label htmlFor={`eventType-${option.value}`} className="text-sm text-gray-700">
-                            {option.label}
-                          </Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          role="combobox"
+                          className="w-full justify-between"
+                        >
+                          {formData.eventTypes.length > 0 
+                            ? `${formData.eventTypes.length} event type${formData.eventTypes.length > 1 ? 's' : ''} selected`
+                            : "Select types of events you organize"
+                          }
+                          <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-full p-0" align="start">
+                        <div className="max-h-60 overflow-auto p-2">
+                          {[
+                            { value: 'Social Events (Weddings, Birthday Parties, etc.)', label: 'Social Events (Weddings, Birthday Parties, etc.)' },
+                            { value: 'Corporate Events (Product Launches, Conferences, etc.)', label: 'Corporate Events (Product Launches, Conferences, etc.)' },
+                            { value: 'Community Events (Charity, Fundraisers, etc.)', label: 'Community Events (Charity, Fundraisers, etc.)' },
+                            { value: 'Private/Intimate Events (Proposal, Family Dinner, etc.)', label: 'Private/Intimate Events (Proposal, Family Dinner, etc.)' },
+                            { value: 'Public/Entertainment Events (Concerts, Festivals, etc.)', label: 'Public/Entertainment Events (Concerts, Festivals, etc.)' }
+                          ].map((option) => (
+                            <div key={option.value} className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded">
+                              <Checkbox
+                                id={`eventType-${option.value}`}
+                                checked={formData.eventTypes.includes(option.value)}
+                                onCheckedChange={(checked) => handleEventTypeChange(option.value, checked as boolean)}
+                              />
+                              <Label htmlFor={`eventType-${option.value}`} className="text-sm text-gray-700 cursor-pointer">
+                                {option.label}
+                              </Label>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
+                      </PopoverContent>
+                    </Popover>
                   </div>
 
                   {/* Event Frequency - Client Only */}

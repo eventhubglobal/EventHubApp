@@ -31,7 +31,7 @@ export const metadata: Metadata = {
       { url: '/favicon.svg', type: 'image/svg+xml' }
     ],
     shortcut: '/favicon.ico',
-    apple: '/favicon.svg',
+    apple: '/favicon.ico',
   },
 };
 
@@ -42,6 +42,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
+      </head>
       <body className={`${mooli.variable} ${raleway.variable} ${asul.variable} font-raleway`}>
         {children}
         <Toaster />
