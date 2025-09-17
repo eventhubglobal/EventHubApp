@@ -22,7 +22,6 @@ export interface WaitlistVendorData {
   phoneNumber: string; // Required by API - added missing field
   location: string; // Required by API
   eventTypes: string[]; // Required by API - service categories like "Catering & Drinks"
-  eventFrequency: string; // Required by API - event frequency
   businessSize: string; // Required by API - business size
   excitedFeatures: string; // Required by API
   receiveUpdates: boolean; // Required by API
@@ -176,7 +175,6 @@ export class WaitlistApiService {
       phoneNumber: '+1987654321', // Added required phone number
       location: 'Test City',
       eventTypes: ['Catering & Drinks'], // Service categories as required by API
-      eventFrequency: 'monthly', // Required by API
       businessSize: 'small business (2-10 people)', // Updated to match API specification
       excitedFeatures: 'Looking forward to the platform',
       receiveUpdates: true,
@@ -220,7 +218,6 @@ export class WaitlistApiService {
         phoneNumber: '+1234567890', // Added required phone number
         location: 'Test City',
         eventTypes: ['Catering & Drinks'],
-        eventFrequency: 'monthly',
         businessSize: businessSize,
         excitedFeatures: 'Testing business size',
         receiveUpdates: true,
