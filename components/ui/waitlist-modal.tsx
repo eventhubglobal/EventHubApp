@@ -104,7 +104,6 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
           phoneNumber: formData.phone.trim(), // Added phone number
           location: formData.location.trim(),
           eventTypes: formData.eventTypes, // Already an array
-          eventFrequency: formData.eventFrequency, // Required by API
           businessSize: formData.businessSize, // Required by API
           excitedFeatures: formData.excitedFeatures.trim(),
           receiveUpdates: formData.updates,
@@ -438,8 +437,8 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     </div>
                   </div>
 
-                  {/* Event Frequency - Vendor Only */}
-                  <div>
+                  {/* Event Frequency - Vendor Only - NOT REQUIRED BY BACKEND */}
+                  {/* <div>
                     <Label htmlFor="vendorEventFrequency" className="text-sm font-medium text-gray-700 mb-2 block">
                       How often do you work on events? *
                     </Label>
@@ -460,7 +459,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                       </select>
                       <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
                     </div>
-                  </div>
+                  </div> */}
                 </>
               ) : (
                 <>
